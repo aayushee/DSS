@@ -1,0 +1,104 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{torget2011mapping}
+A.~J. Torget, R.~Mihalcea, J.~Christensen, G.~McGhee, Mapping texts: Combining
+  text-mining and geo-visualization to unlock the research potential of
+  historical newspapers.
+
+\bibitem{palfray2012logical}
+T.~Palfray, D.~Hebert, S.~Nicolas, P.~Tranouez, T.~Paquet, Logical segmentation
+  for article extraction in digitized old newspapers, in: Proceedings of the
+  2012 ACM symposium on Document engineering, ACM, 2012, pp. 129--132.
+
+\bibitem{mcmurdo2013vermont}
+T.~McMurdo, B.~MacLennan, The vermont digital newspaper project and the
+  national digital newspaper program, Library Resources \& Technical Services
+  57~(3) (2013) 148--163.
+
+\bibitem{singh2012survey}
+A.~Singh, K.~Bacchuwar, A.~Bhasin, A survey of ocr applications, International
+  Journal of Machine Learning and Computing 2~(3) (2012) 314--318.
+
+\bibitem{dutta2011learning}
+H.~Dutta, R.~J. Passonneau, A.~Lee, A.~Radeva, B.~Xie, D.~L. Waltz, B.~Taranto,
+  Learning parameters of the k-means algorithm from subjective human
+  annotation., in: FLAIRS Conference, 2011.
+
+\bibitem{yang2011topic}
+T.-I. Yang, A.~J. Torget, R.~Mihalcea, Topic modeling on historical newspapers,
+  in: Proceedings of the 5th ACL-HLT Workshop on Language Technology for
+  Cultural Heritage, Social Sciences, and Humanities, Association for
+  Computational Linguistics, 2011, pp. 96--104.
+
+\bibitem{kukich1992techniques}
+K.~Kukich, Techniques for automatically correcting words in text, ACM Computing
+  Surveys (CSUR) 24~(4) (1992) 377--439.
+
+\bibitem{strohmaier2003lexical}
+C.~M. Strohmaier, C.~Ringlstetter, K.~U. Schulz, S.~Mihov, Lexical
+  postcorrection of ocr-results: The web as a dynamic secondary dictionary?,
+  in: ICDAR, Citeseer, 2003, pp. 1133--1137.
+
+\bibitem{ringlstetter2007text}
+C.~Ringlstetter, M.~Hadersbeck, K.~U. Schulz, S.~Mihov, Text correction using
+  domain dependent bigram models from web crawls, in: Proceedings of the
+  International Joint Conference on Artificial Intelligence (IJCAI-2007)
+  Workshop on Analytics for Noisy Unstructured Text Data, 2007.
+
+\bibitem{elmi1998spelling}
+M.~A. Elmi, M.~Evens, Spelling correction using context, in: Proceedings of the
+  36th Annual Meeting of the Association for Computational Linguistics and 17th
+  International Conference on Computational Linguistics-Volume 1, Association
+  for Computational Linguistics, 1998, pp. 360--364.
+
+\bibitem{bassil2012ocr}
+Y.~Bassil, M.~Alwani, Ocr context-sensitive error correction based on google
+  web 1t 5-gram data set, arXiv preprint arXiv:1204.0188.
+
+\bibitem{tong1996statistical}
+X.~Tong, D.~A. Evans, A statistical approach to automatic ocr error correction
+  in context, in: Proceedings of the fourth workshop on very large corpora,
+  1996, pp. 88--100.
+
+\bibitem{brill2000improved}
+E.~Brill, R.~C. Moore, An improved error model for noisy channel spelling
+  correction, in: Proceedings of the 38th Annual Meeting on Association for
+  Computational Linguistics, Association for Computational Linguistics, 2000,
+  pp. 286--293.
+
+\bibitem{agarwal2013utilizing}
+S.~Agarwal, Utilizing big data in identification and correction of ocr errors.
+
+\bibitem{wagner1974string}
+R.~A. Wagner, M.~J. Fischer, The string-to-string correction problem, Journal
+  of the ACM (JACM) 21~(1) (1974) 168--173.
+
+\bibitem{christen2006comparison}
+P.~Christen, A comparison of personal name matching: Techniques and practical
+  issues, in: Data Mining Workshops, 2006. ICDM Workshops 2006. Sixth IEEE
+  International Conference on, IEEE, 2006, pp. 290--294.
+
+\bibitem{marzal1993computation}
+A.~Marzal, E.~Vidal, Computation of normalized edit distance and applications,
+  Pattern Analysis and Machine Intelligence, IEEE Transactions on 15~(9) (1993)
+  926--932.
+
+\bibitem{schulz2002fast}
+K.~U. Schulz, S.~Mihov, Fast string correction with levenshtein automata,
+  International Journal on Document Analysis and Recognition 5~(1) (2002)
+  67--85.
+
+\bibitem{levenshtein1966binary}
+V.~I. Levenshtein, Binary codes capable of correcting deletions, insertions and
+  reversals, in: Soviet Physics Doklady, Vol.~10, 1966, p. 707.
+
+\bibitem{reynaert2008all}
+M.~Reynaert, All, and only, the errors: more complete and consistent spelling
+  and ocr-error correction evaluation., in: LREC, 2008.
+
+\end{thebibliography}
