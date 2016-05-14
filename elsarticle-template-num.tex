@@ -130,9 +130,9 @@ In this paper, we describe the development of an N-word grams Spell Correction E
 \label{spell:rw}
 
 Kukich\cite{kukich1992techniques} comprehensively discusses various spelling correction techniques based on non word, isolated word and real word spelling errors. N-gram analysis, dictionary lookup and probabilistic techniques (\cite{strohmaier2003lexical}, \cite{ringlstetter2007text}) are used for correcting isolated and nonword errors while context-dependent techniques are used mostly for correcting real word errors including the correction of word split and join errors \cite{elmi1998spelling}.
-%N-gram techniques work by examining each n-gram in the text string and comparing against a pre-compiled table of n-gram statistics to retrieve the correct word while dictionary look up techniques directly check whether the text string appears in the dictionary using string matching algorithms. Both techniques require a dictionary or a large text corpus and take frequency of n-grams or word occurrence into account in order to find the correct spelling .
-%Probabilistic techniques use transition and word confusion probabilities to estimate likelihood of the correction in order to rank and retrieve correct word spelling.
-%On the other hand, Context-dependent techniques require contextual information and use either extensive NLP techniques or Statistical Language Modeling (SLM) for spelling correction.
+N-gram techniques work by examining each n-gram in the text string and comparing against a pre-compiled table of n-gram statistics to retrieve the correct word while dictionary look up techniques directly check whether the text string appears in the dictionary using string matching algorithms. Both techniques require a dictionary or a large text corpus and take frequency of n-grams or word occurrence into account in order to find the correct spelling .
+Probabilistic techniques use transition and word confusion probabilities to estimate likelihood of the correction in order to rank and retrieve correct word spelling.
+On the other hand, Context-dependent techniques require contextual information and use either extensive NLP techniques or Statistical Language Modeling (SLM) for spelling correction.
 Bassil and Alwani\cite{bassil2012ocr} use Google 1-5 gram word dataset to gain context information in order to determine the correct words sequence in the text for correction.
 Tong and Evans\cite{tong1996statistical} use Statistical Language Modeling (SLM) approach involving information from letter n-grams, character confusion and word bi-gram probabilities to perform context sensitive spelling correction obtaining a 60 percent error reduction rate. All these spelling correction techniques have developed over time and have been used in combination to achieve improved accuracy \cite{brill2000improved}. Agarwal et al.\cite{agarwal2013utilizing} use a combination of Google suggestions, LCS and character confusion probabilities for choosing the correct spelling on a small set of historical newspaper data and achieve recall and precision of $51\%$ and $100\%$ respectively.
 
@@ -141,8 +141,8 @@ The edit distance approach, suggested initially by Wagner and Fischer\cite{wagne
 %There has not been enough research work regarding automatic evaluation of word-by-word post spelling correction on OCR dataset consisting of Word Split and Join errors. 
 All of the above algorithms are evaluated based on the percentage of spelling errors corrected or reduction in the word error rate and do not consider the word alignment problem arising due to word split and join errors in the OCR text. 
 
-%Semi-automatic spelling correction systems \cite{taghva2001ocrspell} require user interaction in order to perform complete correction and system evaluation. Rice\cite{rice1996measuring} discusses OCR errors similar to the ones in our dataset. Their algorithm evaluates edit distance spelling correction by estimating word accuracy; the length of LCS between correct and incorrect strings on a page-by-page level is used as the relevant metric. 
-%The evaluation strategy works correctly but the definition of accuracy does not give a complete coverage of the spell correction as it does not provide any information on the errors missed by the spelling corrector due to lack of word by word comparison/alignment during the evaluation procedure.
+Semi-automatic spelling correction systems \cite{taghva2001ocrspell} require user interaction in order to perform complete correction and system evaluation. Rice\cite{rice1996measuring} discusses OCR errors similar to the ones in our dataset. Their algorithm evaluates edit distance spelling correction by estimating word accuracy; the length of LCS between correct and incorrect strings on a page-by-page level is used as the relevant metric. 
+The evaluation strategy works correctly but the definition of accuracy does not give a complete coverage of the spell correction as it does not provide any information on the errors missed by the spelling corrector due to lack of word by word comparison/alignment during the evaluation procedure.
 
 
 
@@ -187,7 +187,8 @@ The Edit Distance algorithm based on Levenshtein distance\cite{levenshtein1966bi
 
 \noindent \textbf{Spelling Correction Algorithm Evaluation }
 \label{spell:sce}
-For evaluating the performance of spell correction, the raw OCR text and OCR text after application of spelling correction algorithm (corrected text) needs to be compared with the original newspaper text. The OCR text is extremely garbled with Word Split and Join errors due to which word-to-word alignment with the original newspaper text is impossible,i.e., the raw OCR and original newspaper text are of different lengths. A novel algorithm,Spelling Correction Evaluation (SCE) based on N-gram approach is proposed for automatic evaluation of the corrected text. %word-by-word against the manually corrected subset of the news articles dataset. %The SCE algorithm can be used for evaluation of any type of spelling correction algorithm - dictionary look up, context sensitive or probabilistic spell correction algorithms.
+For evaluating the performance of spell correction, the raw OCR text and OCR text after application of spelling correction algorithm (corrected text) needs to be compared with the original newspaper text. The OCR text is extremely garbled with Word Split and Join errors due to which word-to-word alignment with the original newspaper text is impossible,i.e., the raw OCR and original newspaper text are of different lengths. A novel algorithm,Spelling Correction Evaluation (SCE) based on N-gram approach is proposed for automatic evaluation of the corrected text. %word-by-word against the manually corrected subset of the news articles dataset. 
+The SCE algorithm can be used for evaluation of any type of spelling correction algorithm - dictionary look up, context sensitive or probabilistic spell correction algorithms.
 The  following metrics are used for estimating the performance:
 %\noindent \textbf{Evaluation Parameters}
 %\begin{description}
@@ -297,8 +298,6 @@ Any other value of i                                                            
 %
 %
 %
-%
-%
 %\begin{algorithm}[H]
 %\caption{MatchWordGrams Function called by Algorithm 1}
 %\begin{algorithmic}
@@ -339,37 +338,37 @@ Any other value of i                                                            
 
 
 
-%\textbf{An Illustrative Example } The execution of the SCE algorithm can be demonstrated with the help of the following example:
-%Consider 3 versions of a scanned image of a newspaper article -- the original text of the scanned image, the raw OCR text and the text after spell correction. %in Figure~\ref{figure:4}. 
-%Assume, the texts are:
-%
-% OcrLine= \textit{by tltn rejmrt of th cepert aocountauts who}
-%
-%CorrectedLine= \textit{by than report of the expert accountants who}
-%
-%OriginalLine= \textit{by the report of the expert accountants who} 
-%
-%\noindent Here, for each token of CorrectedLine, we find its index and call the MatchWordGrams function accordingly. For the first token `by' at index i=0 in CorrectedLine, we consider the word window to be ``by the report" (index j=0 to 2) in OriginalLine by matching iteratively with each token to see if there is a match and also if there has been a spelling correction by comparing with the corresponding token in OcrLine. Here, no change was made to the spelling of `by' and it matches with a word in words window, so it is marked as a FN. For the second token `than' at index i=1, we consider the word window to be ``by the report of" (index j=0 to 3) for which there is no match in the window but there has been a spelling correction from `tltn' to `than', which implies the correction was wrong and the token is marked as a $FP$. For the third token `report' at index i=2, we consider the window as ``by the report of the" (index j=0 to 4) in Original Line and find that there is a match in the word window and there has been a spelling correction too from `rejmrt' to `report' which makes this token a $TP$. Similarly, rest of the tokens get marked for each line in the Corrected.txt. 
-%
-%Another example can be considered from Line 10 in Figure~\ref{figure:3} and Figure~\ref{figure:4} where the number of tokens is different in CorrectedLine and OriginalLine. In such a case, direct alignment between tokens is not possible because of which the words window becomes useful. Here, when the last token `Richmond' of CorrectedLine is considered at index i=3, the corresponding words window becomes ``Jury now sitting at Richmond" (index j=1 to 5) for which there is a match in the words windows and corresponding spelling has also been changed from `tilchmond' to `Richmond' which makes it a $TP$. Had the word window not been considered, the corresponding token at index j=3 in OriginalLine would have been chosen as `sitting' which would have resulted in a $FP$. 
-%   
-%
-%\begin{figure}[!htb]
-%\begin{center}
-%\includegraphics[scale=0.4]{img3}
-%\includegraphics[scale=0.75]{originalimg3}
-%\caption{Scanned image of a newspaper article (left) along with its original text (right)}
-%\label{figure:3}
-%\end{center}
-%\end{figure}
-%
-%
-%\begin{figure}[!htb]
-%\includegraphics[scale=0.75]{ocr3}
-%\includegraphics[scale=0.75]{corrected3}
-%\caption{OCR raw text (left) and Spell corrected text (right) of the article}
-%\label{figure:4}
-%\end{figure} 
+\textbf{An Illustrative Example } The execution of the SCE algorithm can be demonstrated with the help of the following example:
+Consider 3 versions of a scanned image of a newspaper article -- the original text of the scanned image, the raw OCR text and the text after spell correction. %in Figure~\ref{figure:4}. 
+Assume, the texts are:
+
+OcrLine= \textit{by tltn rejmrt of th cepert aocountauts who}
+
+CorrectedLine= \textit{by than report of the expert accountants who}
+
+OriginalLine= \textit{by the report of the expert accountants who} 
+
+\noindent Here, for each token of CorrectedLine, we find its index and call the MatchWordGrams function accordingly. For the first token `by' at index i=0 in CorrectedLine, we consider the word window to be ``by the report" (index j=0 to 2) in OriginalLine by matching iteratively with each token to see if there is a match and also if there has been a spelling correction by comparing with the corresponding token in OcrLine. Here, no change was made to the spelling of `by' and it matches with a word in words window, so it is marked as a FN. For the second token `than' at index i=1, we consider the word window to be ``by the report of" (index j=0 to 3) for which there is no match in the window but there has been a spelling correction from `tltn' to `than', which implies the correction was wrong and the token is marked as a $FP$. For the third token `report' at index i=2, we consider the window as ``by the report of the" (index j=0 to 4) in Original Line and find that there is a match in the word window and there has been a spelling correction too from `rejmrt' to `report' which makes this token a $TP$. Similarly, rest of the tokens get marked for each line in the Corrected.txt. 
+
+Another example can be considered from Line 10 in Figure~\ref{figure:3} and Figure~\ref{figure:4} where the number of tokens is different in CorrectedLine and OriginalLine. In such a case, direct alignment between tokens is not possible because of which the words window becomes useful. Here, when the last token `Richmond' of CorrectedLine is considered at index i=3, the corresponding words window becomes ``Jury now sitting at Richmond" (index j=1 to 5) for which there is a match in the words windows and corresponding spelling has also been changed from `tilchmond' to `Richmond' which makes it a $TP$. Had the word window not been considered, the corresponding token at index j=3 in OriginalLine would have been chosen as `sitting' which would have resulted in a $FP$. 
+   
+
+\begin{figure}[!htb]
+\begin{center}
+\includegraphics[scale=0.4]{img3}
+\includegraphics[scale=0.75]{originalimg3}
+\caption{Scanned image of a newspaper article (left) along with its original text (right)}
+\label{figure:3}
+\end{center}
+\end{figure}
+
+
+\begin{figure}[!htb]
+\includegraphics[scale=0.75]{ocr3}
+\includegraphics[scale=0.75]{corrected3}
+\caption{OCR raw text (left) and Spell corrected text (right) of the article}
+\label{figure:4}
+\end{figure} 
 
 \section{Empirical Evaluation and Results}
 \label{spell:results}
@@ -379,28 +378,28 @@ Any other value of i                                                            
 The dataset used for empirical evaluation of the algorithm has been obtained from the Chronicling America\footnote{\texttt{http://chroniclingamerica.loc.gov/}} website. It contains scanned newspaper pages published in New York between1890 to 1920. OCR software is run over high
 resolution images to create searchable full text of the newspaper articles.
 
-%In order to make a newspaper available for searching on the Internet,
-%the following processes used in \cite{dutta2011learning} must take place: (1) the microfilm copy or
-%paper original is scanned; (2) master and Web image files are
-%generated; (3) metadata is assigned for each page to improve the
-%search capability of the newspaper; (4) OCR software is run over high
-%resolution images to create searchable full text and (5) OCR text,
-%images, and metadata are imported into a digital library software
-%program. 
-%The scanned newspaper holdings of the NYPL offers a wealth of
-%data and opinion for researchers and historians.The newspaper titles and digitized pages available through the
-%Chronicling America website can be searched using the OpenSearch
-%protocol\footnote{\texttt{http://www.opensearch.org/Home}}.
-%Unfortunately, the current search facilities are rudimentary and
-%irrelevant documents are often more highly ranked than relevant ones.
-%The newspapers are scanned on a page-by-page basis and article level
-%segmentation is poor or non-existent; the OCR scanning process is far
-%from perfect and the documents generated from it contains a large
-%amount of garbled text. In a bid to serve its patrons better, the New
-%York Public Library employed human annotators to clean headlines of
-%articles and text, but the process of manually reading all the old
-%newspapers article-by-article and cleaning them soon became very
-%expensive. 
+In order to make a newspaper available for searching on the Internet,
+the following processes used in \cite{dutta2011learning} must take place: (1) the microfilm copy or
+paper original is scanned; (2) master and Web image files are
+generated; (3) metadata is assigned for each page to improve the
+search capability of the newspaper; (4) OCR software is run over high
+resolution images to create searchable full text and (5) OCR text,
+images, and metadata are imported into a digital library software
+program. 
+The scanned newspaper holdings of the NYPL offers a wealth of
+data and opinion for researchers and historians.The newspaper titles and digitized pages available through the
+Chronicling America website can be searched using the OpenSearch
+protocol\footnote{\texttt{http://www.opensearch.org/Home}}.
+Unfortunately, the current search facilities are rudimentary and
+irrelevant documents are often more highly ranked than relevant ones.
+The newspapers are scanned on a page-by-page basis and article level
+segmentation is poor or non-existent; the OCR scanning process is far
+from perfect and the documents generated from it contains a large
+amount of garbled text. In a bid to serve its patrons better, the New
+York Public Library employed human annotators to clean headlines of
+articles and text, but the process of manually reading all the old
+newspapers article-by-article and cleaning them soon became very
+expensive. 
 
 \noindent \textbf{Data Statistics }%The OCR text available is on a page-by-page level and no article level segmentation is provided. OCR text dataset is therefore, taken from a PostgreSQL database where article level segmentation of page-level OCR text from Chronicling America is available for
 Two months of articles of ``The Sun" newspaper from November-December 1894 consisting of 14020 news articles with a total of 8,403,844 tokens are used for empirical evaluation. %The newspaper database ER diagram \footnote{https://power.ldeo.columbia.edu/twiki/pub/Incubator/BodhiDBDesign/Final ERD.pdf }
@@ -423,9 +422,9 @@ The spell corrector also shows an Accuracy of $73.1 \%$  when corrected text is 
 
 \section{Discussion}
 \label{spell:discuss}
-%The edit distance based spell corrector used in this work corrects non-real word errors by focusing on isolated words in the dataset.
-%We believe a better accuracy of spell correction can be obtained by correcting the new line errors in the articles. This can be done by checking for if the word at last index of a linetext or the word at first index of the next linetext is a word not present in the dictionary and combining the two and checking again in the dictionary for a valid word. The new word, if present in the dictionary can be replaced by the two words from which it is formed thereby removing the New Line error. Similar approach can be applied for word split and join errors but would require each word of an article not present in the dictionary to be analyzed along with some window of words before and after it to make a correction. 
-%Since edit distance algorithm is governed by the dictionary choice, using a dictionary with historical terms, places and people names can also help perform spelling correction better and improve its accuracy.
+The edit distance based spell corrector used in this work corrects non-real word errors by focusing on isolated words in the dataset.
+We believe a better accuracy of spell correction can be obtained by correcting the new line errors in the articles. This can be done by checking for if the word at last index of a linetext or the word at first index of the next linetext is a word not present in the dictionary and combining the two and checking again in the dictionary for a valid word. The new word, if present in the dictionary can be replaced by the two words from which it is formed thereby removing the New Line error. Similar approach can be applied for word split and join errors but would require each word of an article not present in the dictionary to be analyzed along with some window of words before and after it to make a correction. 
+Since edit distance algorithm is governed by the dictionary choice, using a dictionary with historical terms, places and people names can also help perform spelling correction better and improve its accuracy.
 %%DELETE THE PART ABOUT HOW NEW LINE AND WORD SPLIT AND JOIN ERRORS CAN BE REMOVED??
 We compared our N-gram based SCE algorithm with the LCS (Longest Common Subsequence) algorithm\footnote{https://en.wikipedia.org/wiki/Longest\_common\_subsequence\_problem}. The LCS of corrected and original text gives a list of matching corrected words found in the original text. Following the similar evaluation procedure of calculating accuracy as in the N-word gram approach, %if a corrected word finds a match in the LCS and its spelling is found to be corrected, then it is marked as a TP otherwise a TN and if no match is found in LCS and spelling has been corrected, then it is marked a FP or else FN. 
 it was found that there is no statistically significant difference in accuracy when using either of the two algorithms. We posit that LCS is a special case of the N-word gram algorithm when the window size N is set to the complete text in a line.

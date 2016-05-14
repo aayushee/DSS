@@ -93,6 +93,15 @@ K.~U. Schulz, S.~Mihov, Fast string correction with levenshtein automata,
   International Journal on Document Analysis and Recognition 5~(1) (2002)
   67--85.
 
+\bibitem{taghva2001ocrspell}
+K.~Taghva, E.~Stofsky, Ocrspell: an interactive spelling correction system for
+  ocr errors in text, International Journal on Document Analysis and
+  Recognition 3~(3) (2001) 125--137.
+
+\bibitem{rice1996measuring}
+S.~V. Rice, Measuring the accuracy of page-reading systems, Ph.D. thesis,
+  University of Nevada (1996).
+
 \bibitem{levenshtein1966binary}
 V.~I. Levenshtein, Binary codes capable of correcting deletions, insertions and
   reversals, in: Soviet Physics Doklady, Vol.~10, 1966, p. 707.
