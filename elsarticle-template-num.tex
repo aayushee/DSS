@@ -156,6 +156,36 @@ The evaluation strategy works correctly but the definition of accuracy does not 
 
 \section{Data}
 \label{spell:errors}
+
+The dataset used for empirical evaluation of the algorithm has been obtained from the Chronicling America\footnote{\texttt{http://chroniclingamerica.loc.gov/}} website. It contains scanned newspaper pages published in New York between1890 to 1920. OCR software is run over high
+resolution images to create searchable full text of the newspaper articles.
+
+In order to make a newspaper available for searching on the Internet,
+the following processes used in \cite{dutta2011learning} must take place: (1) the microfilm copy or
+paper original is scanned; (2) master and Web image files are
+generated; (3) metadata is assigned for each page to improve the
+search capability of the newspaper; (4) OCR software is run over high
+resolution images to create searchable full text and (5) OCR text,
+images, and metadata are imported into a digital library software
+program. 
+The scanned newspaper holdings of the NYPL offers a wealth of
+data and opinion for researchers and historians.The newspaper titles and digitized pages available through the
+Chronicling America website can be searched using the OpenSearch
+protocol\footnote{\texttt{http://www.opensearch.org/Home}}.
+Unfortunately, the current search facilities are rudimentary and
+irrelevant documents are often more highly ranked than relevant ones.
+The newspapers are scanned on a page-by-page basis and article level
+segmentation is poor or non-existent; the OCR scanning process is far
+from perfect and the documents generated from it contains a large
+amount of garbled text. In a bid to serve its patrons better, the New
+York Public Library employed human annotators to clean headlines of
+articles and text, but the process of manually reading all the old
+newspapers article-by-article and cleaning them soon became very
+expensive.
+
+
+
+
 \begin{figure}[hbt]
 \includegraphics[scale=0.75]{originalimage}
 \includegraphics[scale=0.80]{ocr}
@@ -177,11 +207,25 @@ The evaluation strategy works correctly but the definition of accuracy does not 
 \end{description} 
 
 \subsection{Data Statistics}
+Our corpus consists of 300 OCR text articles from the ``The Sun" newspaper issues of November-December 1894 taken from the Chronicling America website. The text does not have any punctuation and contains a large amount of garbled text containing OCR errors mentioned in Section~\ref{spell:errors}.
+ Spelling correction is performed on this corpus to obtain spell corrected text. We also used manually cleaned OCR text to check and validate the correctness of spelling correction procedure. 
 
+
+%The OCR text available is on a page-by-page level and no article level segmentation is provided. OCR text dataset is therefore, taken from a PostgreSQL database where article level segmentation of page-level OCR text from Chronicling America is available for
+Two months of articles of ``The Sun" newspaper from November-December 1894 consisting of 14020 news articles with a total of 8,403,844 tokens are used for empirical evaluation. %The newspaper database ER diagram \footnote{https://power.ldeo.columbia.edu/twiki/pub/Incubator/BodhiDBDesign/Final ERD.pdf }
+%is used to extract the required articles text from the database by dumping complete dataset and extracting individual articles linetext based on their unique ID. 
+
+
+
+ 
+Due to the word split and join errors and new line errors in the OCR text, the 3 parallel corpora , i.e., OCR text, its spell corrected version and the original correct version need to be aligned so that a word by word correspondence could be made among all versions and the spelling correction algorithm could be evaluated.
 
 \subsection{Manual Annotation of Data}
-In order to obtain the original cleaned text from the OCR data, we used manual annotators who annotated the OCR articles from their newspaper images.
---DESCRIBE THE ANNOTATION EXPERIMENT HERE.
+For the evaluation of spelling correction on spell corrected data, cleaned/ original newspaper text is required so that a word by word matching can be done to see how well the spelling corrector performs. Due to unavailability of a spell corrected and original correct word pairs list, manual annotation of the OCR text articles needs to be done so that the spelling correction evaluation can be done accordingly. 
+In order to obtain the original cleaned text from the OCR text, we used manual annotators who annotated the OCR articles from their newspaper images. For this purpose, we recruited 5 annotators each of whom were given 50 OCR articles and their corresponding images to annotate. For every OCR article, they had to write the corresponding clean line text called as the original newspaper article version by looking at the OCR article's newspaper image/s. 
+DOUBT: Does ths need to be mentioned here: The OCR text article was given as reference so that the number of linetexts in the correctly written version from newspaper image and the OCR text article remain same.
+ Each annotator was given a different set of articles to work with ranging from November-December issue of ``The Sun" newspaper and after the annotation process was complete, one more annotator was asked to verify whether the resulting original article was completely error free or not.
+
 
 
 
@@ -395,52 +439,47 @@ Another example can be considered from Line 10 in Figure~\ref{figure:3} and Figu
 \section{Empirical Evaluation and Results}
 \label{spell:results}
 
-\noindent \textbf{Data Source} 
-%%%%DELETE THIS SECTION IF REQUIRED AND MERGE IT WITH THE NEXT SECTION...
-The dataset used for empirical evaluation of the algorithm has been obtained from the Chronicling America\footnote{\texttt{http://chroniclingamerica.loc.gov/}} website. It contains scanned newspaper pages published in New York between1890 to 1920. OCR software is run over high
-resolution images to create searchable full text of the newspaper articles.
 
-In order to make a newspaper available for searching on the Internet,
-the following processes used in \cite{dutta2011learning} must take place: (1) the microfilm copy or
-paper original is scanned; (2) master and Web image files are
-generated; (3) metadata is assigned for each page to improve the
-search capability of the newspaper; (4) OCR software is run over high
-resolution images to create searchable full text and (5) OCR text,
-images, and metadata are imported into a digital library software
-program. 
-The scanned newspaper holdings of the NYPL offers a wealth of
-data and opinion for researchers and historians.The newspaper titles and digitized pages available through the
-Chronicling America website can be searched using the OpenSearch
-protocol\footnote{\texttt{http://www.opensearch.org/Home}}.
-Unfortunately, the current search facilities are rudimentary and
-irrelevant documents are often more highly ranked than relevant ones.
-The newspapers are scanned on a page-by-page basis and article level
-segmentation is poor or non-existent; the OCR scanning process is far
-from perfect and the documents generated from it contains a large
-amount of garbled text. In a bid to serve its patrons better, the New
-York Public Library employed human annotators to clean headlines of
-articles and text, but the process of manually reading all the old
-newspapers article-by-article and cleaning them soon became very
-expensive. 
+ 
 
-\noindent \textbf{Data Statistics }%The OCR text available is on a page-by-page level and no article level segmentation is provided. OCR text dataset is therefore, taken from a PostgreSQL database where article level segmentation of page-level OCR text from Chronicling America is available for
-Two months of articles of ``The Sun" newspaper from November-December 1894 consisting of 14020 news articles with a total of 8,403,844 tokens are used for empirical evaluation. %The newspaper database ER diagram \footnote{https://power.ldeo.columbia.edu/twiki/pub/Incubator/BodhiDBDesign/Final ERD.pdf }
-%is used to extract the required articles text from the database by dumping complete dataset and extracting individual articles linetext based on their unique ID. 
-The text does not have any punctuation and contains a large amount of garbled text containing OCR errors mentioned in Section~\ref{spell:errors}.
 
 \noindent \textbf{Experimental Procedure and Results}
 
-\noindent \textbf{Aim: }The aim of our experiments is to answer the following question:
-How good is the spell corrector? The metrics for evaluation are accuracy and time taken to correct the text.
+\noindent \textbf{Aim: }The aim of our experiments is to answer the following research questions:
+
+RQ1: Which spelling correction algorithm is better? %: auc score
+
+RQ2: How does the variation of the parameters of SCE affects the result? %mention LCS here.
+
+RQ3: How do parameters of the spelling correction algorithm affect the evaluation results?
 
 
-\noindent \textbf{Materials: }The spelling correction algorithm is used to correct all the 14020 OCR raw text articles in the dataset. The dictionary used for look-up is a concatenation of several public domain books from Project Gutenberg and lists of most frequent words from Wiktionary and the British National Corpus\footnote{http://norvig.com/big.txt}. This is augmented with a large people names list which is obtained  by running Stanford NER-CRF parser on subsets of the ClueWeb12 dataset made available in the TREC 2013 Crowdsourcing Track\footnote{http://boston.lti.cs.cmu.edu/clueweb12/TRECcrowdsourcing2013/}. This enhanced dictionary has been used to give special consideration to correction of person names in the dataset.
+\noindent \textbf{Materials: }The spelling correction algorithms are used to correct all the 300 OCR raw text articles in the dataset. The dictionary used for look-up is a concatenation of several public domain books from Project Gutenberg and lists of most frequent words from Wiktionary and the British National Corpus\footnote{http://norvig.com/big.txt}. This is augmented with a large people names list which is obtained  by running Stanford NER-CRF parser on subsets of the ClueWeb12 dataset made available in the TREC 2013 Crowdsourcing Track\footnote{http://boston.lti.cs.cmu.edu/clueweb12/TRECcrowdsourcing2013/}. This enhanced dictionary has been used to give special consideration to correction of person names in the dataset.
 
-\noindent \textbf{Methods: }In order to answer our research question for checking the performance of spell corrector, we do the following -- 3 versions of each newspaper article are required: OCR raw text, spelling corrector corrected text and the original scanned newspaper article text. Since the dataset is quite large (14020) and it is not possible to get original text of each of these newspaper images, a smaller sample of articles is chosen to study the results of spelling correction. 50 scanned newspaper images are taken and an online OCR\footnote{www.onlineocr.net} is run on them followed by some manual correction to get the original articles text. Accuracy can then be calculated for all 3 versions of 50 newspaper articles using the SCE algorithm. 
+
+
+//////Mention answer to above points here
+
+\noindent \textbf{Methods: }In order to answer RQ1 for comparing the performance of spell correction algorithms, use AUC score as a metric. For answering RQ2, we vary the value of the N=2 in the N-gram SCE algorithm and compare it with the LCS (Lowest Common Substring) algorithm as well to observe the changes in results of evaluation.
+For addressing RQ3, we modify the parameters of both spell correction algorithms,i.e., value of edit distance=2 in the edit distance algorithm and other parameters in context sensitive algorithm and study the modified spell correction evaluation results.
+ 
 
 \noindent \textbf{Results: }
-The spell corrector takes 9 seconds on an average to correct the newspaper OCR articles. It takes a total of 36 hours to run on 14020 articles.
-The spell corrector also shows an Accuracy of $73.1 \%$  when corrected text is compared to OCR text and original article text using our SCE algorithm. We believe that the results are less accurate due to the presence of a large number of non-word, new line, word split and join errors in the OCR data which can not be corrected by the edit distance spelling corrector used for this research. 
+
+////////DOUBT: Should I mention the time taken to run spell correction algo as a parameter in both the algorithms?? 
+
+The edit distance based spell corrector shows an Accuracy of $73.1 \%$  when corrected text is compared to OCR text and original article text using our SCE algorithm. We believe that the results are less accurate due to the presence of a large number of non-word, new line, word split and join errors in the OCR data which can not be corrected by the edit distance spelling corrector used for this research. 
+On the other hand, the Lingpipe based context sensitive spelling corrector has a better AUC score demonstrating that in case of OCR text, this algorithm performs better.
+
+We experimented with different window size for our N-gram based SCE algorithm for which following results were obtained:
+//////COMPUTE RESULTS OF SCE ALGORITHM BY CHANGING WINDOW SIZE
+
+We  also compared our N-gram based SCE algorithm with the LCS (Longest Common Subsequence) algorithm\footnote{https://en.wikipedia.org/wiki/Longest\_common\_subsequence\_problem}. The LCS of corrected and original text gives a list of matching corrected words found in the original text. Following the similar evaluation procedure of calculating accuracy as in the N-word gram approach, %if a corrected word finds a match in the LCS and its spelling is found to be corrected, then it is marked as a TP otherwise a TN and if no match is found in LCS and spelling has been corrected, then it is marked a FP or else FN. 
+it was found that there is no statistically significant difference in accuracy when using either of the two algorithms. We posit that LCS is a special case of the N-word gram algorithm when the window size N is set to the complete text in a line.
+%%DELETE LCS PROCEDURE AND JUST MENTION IT IS A SPECIAL CASE??
+
+//////AFTER THIS, MENTION HOW RESULTS CHANGE WHEN PARAMETERS OF SPELL CORRECTION ALGORITHMS ARE CHANGED
+
 
 \section{Discussion}
 \label{spell:discuss}
@@ -448,9 +487,7 @@ The edit distance based spell corrector used in this work corrects non-real word
 We believe a better accuracy of spell correction can be obtained by correcting the new line errors in the articles. This can be done by checking for if the word at last index of a linetext or the word at first index of the next linetext is a word not present in the dictionary and combining the two and checking again in the dictionary for a valid word. The new word, if present in the dictionary can be replaced by the two words from which it is formed thereby removing the New Line error. Similar approach can be applied for word split and join errors but would require each word of an article not present in the dictionary to be analyzed along with some window of words before and after it to make a correction. 
 Since edit distance algorithm is governed by the dictionary choice, using a dictionary with historical terms, places and people names can also help perform spelling correction better and improve its accuracy.
 %%DELETE THE PART ABOUT HOW NEW LINE AND WORD SPLIT AND JOIN ERRORS CAN BE REMOVED??
-We compared our N-gram based SCE algorithm with the LCS (Longest Common Subsequence) algorithm\footnote{https://en.wikipedia.org/wiki/Longest\_common\_subsequence\_problem}. The LCS of corrected and original text gives a list of matching corrected words found in the original text. Following the similar evaluation procedure of calculating accuracy as in the N-word gram approach, %if a corrected word finds a match in the LCS and its spelling is found to be corrected, then it is marked as a TP otherwise a TN and if no match is found in LCS and spelling has been corrected, then it is marked a FP or else FN. 
-it was found that there is no statistically significant difference in accuracy when using either of the two algorithms. We posit that LCS is a special case of the N-word gram algorithm when the window size N is set to the complete text in a line.
-%%DELETE LCS PROCEDURE AND JUST MENTION IT IS A SPECIAL CASE??
+
 
 
 \section{Conclusion and Future Work}
