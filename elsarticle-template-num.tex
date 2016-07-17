@@ -93,10 +93,9 @@
 
 \begin{abstract}
 %% Text of abstract
-Optical Character Recognition (OCR) of historical text often leads to several kinds of spelling errors. Existing spell correction algorithms do not present a rigorous performance evaluation of the spell correction process. In this paper, we present a novel N-gram based algorithm for checking the accuracy of spell correction which can handle noisy and cleaned text of different lengths.
+Optical Character Recognition (OCR) of historical text often leads to several kinds of spelling errors. Existing spell correction algorithms do not present a rigorous performance evaluation of the spell correction process. In this paper, we present a novel N-gram based algorithm for evaluation of spell correction which can handle noisy and cleaned text of different lengths.
  %First, an edit distance based spell correction algorithm is presented which forms the basis of the evaluation mechanism. The goal of the Spell Correction Evaluation (SCE) algorithm is to measure accuracy of the text corrected by the spell correction algorithm against manually corrected data. N word grams are used to make word-to-word correspondences between the corrected text and the noisy OCR text - each token is then annotated as a True/False Positive/Negative of the correction process. 
-The algorithm relies on appropriately choosing a window of N-words and aligning them in three parallel corpora - noisy OCR, corrected, and cleaned and annotated text (ground truth). Empirical results of spell correction on 300 news articles from the ``The Sun" newspaper, Nov- Dec 1894 are presented on edit distance and context sensitive based spell correctors. The Spell Correction Evaluation (SCE) algorithm evaluates their AUC values to be 0.49 and 0.56 respectively. We posit that this novel algorithm for spell correction evaluation has a wide applicability and can play a crucial role in analyzing large volumes of digitized OCR text.
-
+The algorithm relies on appropriately choosing a window of N-words and aligning them in three parallel corpora - noisy OCR, corrected, and cleaned and annotated text (ground truth). Empirical results of spell correction on 300 news articles from the ``The Sun" newspaper, Nov- Dec 1894 are presented on edit distance and context sensitive based spell correctors. The Spell Correction Evaluation (SCE) algorithm evaluates their AUC values to be 0.49 and 0.56 respectively. We posit that this novel algorithm for spell correction evaluation has a wide applicability for comparing multiple spell correction algorithms which can play a crucial role in analyzing large volumes of digitized OCR text.
 \end{abstract}
 
 \begin{keyword}
@@ -118,10 +117,15 @@ The algorithm relies on appropriately choosing a window of N-words and aligning 
 
 \section{Introduction}
 
-OCR of typed, handwritten or printed text is widely used to obtain digitized text which can be edited, searched, stored and displayed efficiently(\cite{torget2011mapping,palfray2012logical}). It is used in various applications such as banking, digital libraries \cite{mcmurdo2013vermont} and repositories, number plate recognition, and handwriting recognition \cite{singh2012survey}. However, the OCR scanning of printed text generates a lot of garbled text which renders them inadequate for any such tasks. Refinement of such noisy OCR text through spell correction can make them useful for text mining tasks (\cite{dutta2011learning}, \cite{yang2011topic}).
+OCR of typed, handwritten or printed text is widely used to obtain digitized text which can be edited, searched, stored and displayed efficiently(\cite{torget2011mapping,palfray2012logical}). It is used in various applications such as banking, digital libraries \cite{mcmurdo2013vermont} and repositories, number plate recognition, and handwriting recognition \cite{singh2012survey}. However, the OCR scanning of printed text generates a lot of garbled text which renders them inadequate for any such tasks.
+/////DOUBT: Should it be mentioned that OCR of specifically historical documents generates garbled text?
+
+ Refinement of such noisy OCR text through spell correction can make them useful for text mining tasks (\cite{dutta2011learning}, \cite{yang2011topic}). 
+
+//////////DOUBT: Can we say that the USP of our algorithm is that it can be easily used to compare amongst multiple spell correction algorithms and our algorithm will tell which one is suited to a user's application best?
 
 Most spell correction algorithms have focused on improving the correction model and either do not give a detailed performance evaluation of the algorithm post spell correction or the evaluation measures used are not able to completely analyze the performance of such algorithms.  
-A major problem that surfaces when evaluating a spell corrector is that the text has to be verified against the original text (ground truth) to estimate its performance. This one-to-one verification may lead to word alignment problems, since the corrected and original text can be of different lengths.
+A major problem that surfaces when evaluating a spell corrector for OCR text is that the text has to be verified against the original text (ground truth) to estimate its performance. This one-to-one verification may lead to word alignment problems, since the corrected and original text can be of different lengths because of the variety of errors in the OCR text.
 In this paper, we describe the development of an N-word grams Spell Correction Evaluation (SCE) algorithm that can automatically evaluate a spell correction algorithm by using an N-word window to align three parallel corpora - the noisy OCR, corrected and original/ manually cleaned text. 
 We present the performance evaluation results of applying our SCE algorithm on two  commonly used spell correction techniques - Edit distance and Context Sensitive spelliing correction on 300 OCR historical newspaper articles of ``The Sun" newspaper published in Nov-Dec 1894. 
 
@@ -129,33 +133,13 @@ We present the performance evaluation results of applying our SCE algorithm on t
 
 \section{Related Work}
 \label{spell:rw}
-
-Spelling correction algorithms have been vastly discussed in literature but either their evaluation measures and data analysis are not accurate or they do not take all types of OCR errors into consideration.
-Kukich\cite{kukich1992techniques} comprehensively discusses various spelling correction techniques based on non word, isolated word and real word spelling errors. N-gram analysis, dictionary lookup and probabilistic techniques (\cite{strohmaier2003lexical}, \cite{ringlstetter2007text}) are used for correcting isolated and nonword errors while context-dependent techniques are used mostly for correcting real word errors including the correction of word split and join errors \cite{elmi1998spelling}.
-N-gram techniques work by examining each n-gram in the text string and comparing against a pre-compiled table of n-gram statistics to retrieve the correct word while dictionary look up techniques directly check whether the text string appears in the dictionary using string matching algorithms. Both techniques require a dictionary or a large text corpus and take frequency of n-grams or word occurrence into account in order to find the correct spelling .
-Probabilistic techniques use transition and word confusion probabilities to estimate likelihood of the correction in order to rank and retrieve correct word spelling.
-On the other hand, Context-dependent techniques require contextual information and use either extensive NLP techniques or Statistical Language Modeling (SLM) for spelling correction.
-Bassil and Alwani\cite{bassil2012ocr} use Google 1-5 gram word dataset to gain context information in order to determine the correct words sequence in the text for correction.
-Tong and Evans\cite{tong1996statistical} use Statistical Language Modeling (SLM) approach involving information from letter n-grams, character confusion and word bi-gram probabilities to perform context sensitive spelling correction obtaining a 60 percent error reduction rate. All these spelling correction techniques have developed over time and have been used in combination to achieve improved accuracy \cite{brill2000improved}. Agarwal et al.\cite{agarwal2013utilizing} use a combination of Google suggestions, LCS and character confusion probabilities for choosing the correct spelling on a small set of historical newspaper data and achieve recall and precision of $51\%$ and $100\%$ respectively.
-
-The edit distance approach, suggested initially by Wagner and Fischer\cite{wagner1974string}, is a dictionary lookup approach commonly used for OCR data correction because of the large number of substitution errors in OCR data  \cite{kukich1992techniques}\cite{christen2006comparison} which can be corrected using this technique. String edit distance approaches with faster correction are discussed in \cite{marzal1993computation},\cite{schulz2002fast}  with variants like Levenshtein automata and normalized edit distance.
-% WHERE DO I PUT THIS? ? ? Holley et al.\cite{holley2009good} posit that it is difficult to measure the true and improved accuracy of OCR and recording character confidence is not equivalent to the accuracy of the OCR text.
-%There has not been enough research work regarding automatic evaluation of word-by-word post spelling correction on OCR dataset consisting of Word Split and Join errors. 
-All of the above algorithms are evaluated based on the percentage of spelling errors corrected or reduction in the word error rate and do not consider the word alignment problem arising due to word split and join errors in the OCR text. 
-
-Semi-automatic spelling correction systems \cite{taghva2001ocrspell} require user interaction in order to perform complete correction and system evaluation. Rice\cite{rice1996measuring} discusses OCR errors similar to the ones in our dataset. Their algorithm evaluates edit distance spelling correction by estimating word accuracy; the length of LCS between correct and incorrect strings on a page-by-page level is used as the relevant metric. 
-The evaluation strategy works correctly but the definition of accuracy does not give a complete coverage of the spell correction as it does not provide any information on the errors missed by the spelling corrector due to lack of word by word comparison/alignment during the evaluation procedure.
-
----ADD RELATED WORK REGARDING LINGPIPE BASED CONTEXT SENSITIVE SPELL CORRECTION HERE. 
-
----ADD RELATED WORK REGARDING RECENT PAPERS READ ON SPELLING CORRECTION EVALUATION. (REYNAERT PAPERS, Compound words paper)
-
---specifically mention that most of the evaluation mechanisms use OCR and true word pairs for measuring the algorithm performance which is not suitable for a complete evaluation of the spelling correction algorithm where the dataset has word split and join errors.
-
+\input{RelatedWork}
 
 
 \section{Data}
 \label{spell:errors}
+
+\subsection{Data Characteristics}
 
 The dataset used for empirical evaluation of the algorithm has been obtained from the Chronicling America\footnote{\texttt{http://chroniclingamerica.loc.gov/}} website. It contains scanned newspaper pages published in New York between1890 to 1920. OCR software is run over high
 resolution images to create searchable full text of the newspaper articles.
@@ -222,8 +206,8 @@ Due to the word split and join errors and new line errors in the OCR text, the 3
 
 \subsection{Manual Annotation of Data}
 For the evaluation of spelling correction on spell corrected data, cleaned/ original newspaper text is required so that a word by word matching can be done to see how well the spelling corrector performs. Due to unavailability of a spell corrected and original correct word pairs list, manual annotation of the OCR text articles needs to be done so that the spelling correction evaluation can be done accordingly. 
-In order to obtain the original cleaned text from the OCR text, we used manual annotators who annotated the OCR articles from their newspaper images. For this purpose, we recruited 5 annotators each of whom were given 50 OCR articles and their corresponding images to annotate. For every OCR article, they had to write the corresponding clean line text called as the original newspaper article version by looking at the OCR article's newspaper image/s. 
-DOUBT: Does ths need to be mentioned here: The OCR text article was given as reference so that the number of linetexts in the correctly written version from newspaper image and the OCR text article remain same.
+In order to obtain the original cleaned text from the OCR text, we used manual annotators who annotated the OCR articles from their newspaper images. For this purpose, we recruited 5 annotators each of whom were given 50 OCR articles and their corresponding images to annotate. For every OCR article, they had to write the corresponding clean line text called as the original newspaper article version by looking at the OCR article's newspaper image/s. The annotators were also asked not to consider any punctuation in their writing of clean text since the OCR text from Chronicling America is devoid of the same. 
+DOUBT: Does this need to be mentioned here: The OCR text article was given as reference so that the number of linetexts in the correctly written version from newspaper image and the OCR text article remain same.
  Each annotator was given a different set of articles to work with ranging from November-December issue of ``The Sun" newspaper and after the annotation process was complete, one more annotator was asked to verify whether the resulting original article was completely error free or not.
 
 
@@ -239,6 +223,7 @@ DOUBT: Does ths need to be mentioned here: The OCR text article was given as ref
 %%The garbled OCR dataset  needs to be refined by correcting the text with the help of a human editor manually or automatic spelling corrector. Due to the huge size of dataset, human editing would be extremely time consuming and expensive making it impossible and indicating requirement of a spelling correction technique. 
 %We use edit distance algorithm for spelling correction because of its speed and ability to correct OCR errors compared to the n-gram approach \cite{chattopadhyaya2013fast}. Context-dependent spelling correction is not used because of unavailability of n-gram words corpus or ground truth dataset containing OCR and true word pairs.
 %
+This section first describes the two types of algorithms- Edit Distance and Context Sensitive Spell Correction Algorithms followed by a detailed description of the N-Gram based Spell Correction Evaluation (SCE) Algorithm on which the first two algorithms are tested.
 
 \subsection{ Edit Distance Spelling Corrector}
 \label{spell:algorithm}
@@ -248,7 +233,8 @@ The Edit Distance algorithm based on Levenshtein distance\cite{levenshtein1966bi
 
 
 \subsection{Context Sensitive Spelling Corrector}
-
+We use LingPipe's spelling correction algorithm for spelling correction based on context. It is based on a noisy-channel model, which models user mistakes (typos and brainos) and expected user input (based on the data). Mistakes are modeled by weighted edit distances and expected input by a character language model.
+Spelling corrections are motivated by the indexed dictionary which make the algorithm domain sensitive.  The dictionary words are added to the search index and a language model. The language model stores seen phrases and maintains statistics about them. When a word is submitted for correction, the spell corrector looks for possible character edits, namely substitutions, insertions, replacements, transpositions, and deletions, that make the word to be corrected a better fit for the lanaguage model. The spell corrector is also able to split and combine tokens during spelling correction due to which Word Split and Join errors can also be corrected by this algorithm.
 
 
 \subsection{Spelling Correction Algorithm Evaluation }
@@ -440,11 +426,6 @@ Another example can be considered from Line 10 in Figure~\ref{figure:3} and Figu
 \label{spell:results}
 
 
- 
-
-
-\noindent \textbf{Experimental Procedure and Results}
-
 \noindent \textbf{Aim: }The aim of our experiments is to answer the following research questions:
 
 RQ1: Which spelling correction algorithm is better? %: auc score
@@ -455,12 +436,13 @@ RQ3: How do parameters of the spelling correction algorithm affect the evaluatio
 
 
 \noindent \textbf{Materials: }The spelling correction algorithms are used to correct all the 300 OCR raw text articles in the dataset. The dictionary used for look-up is a concatenation of several public domain books from Project Gutenberg and lists of most frequent words from Wiktionary and the British National Corpus\footnote{http://norvig.com/big.txt}. This is augmented with a large people names list which is obtained  by running Stanford NER-CRF parser on subsets of the ClueWeb12 dataset made available in the TREC 2013 Crowdsourcing Track\footnote{http://boston.lti.cs.cmu.edu/clueweb12/TRECcrowdsourcing2013/}. This enhanced dictionary has been used to give special consideration to correction of person names in the dataset.
+All our experiments are run on a 4GB RAM machine on Windows platform and the complete implementation of Edit distance and SCE algorithms has been carried out in Java. The context sensitive based spell correction algorithm from LingPipe 4.1.0 version also implemented in Java has been used in our experiments. 
 
+%%%%%%%Provide links to source code later
 
+//////Mention answer to research questions here
 
-//////Mention answer to above points here
-
-\noindent \textbf{Methods: }In order to answer RQ1 for comparing the performance of spell correction algorithms, use AUC score as a metric. For answering RQ2, we vary the value of the N=2 in the N-gram SCE algorithm and compare it with the LCS (Lowest Common Substring) algorithm as well to observe the changes in results of evaluation.
+\noindent \textbf{Methods: }In order to answer RQ1 for comparing the performance of spell correction algorithms, we use AUC score as a metric as described in previous section. For answering RQ2, we vary the value of the N=2 in the N-gram SCE algorithm and compare it with the LCS (Lowest Common Substring) algorithm as well to observe the changes in results of evaluation.
 For addressing RQ3, we modify the parameters of both spell correction algorithms,i.e., value of edit distance=2 in the edit distance algorithm and other parameters in context sensitive algorithm and study the modified spell correction evaluation results.
  
 
@@ -468,8 +450,8 @@ For addressing RQ3, we modify the parameters of both spell correction algorithms
 
 ////////DOUBT: Should I mention the time taken to run spell correction algo as a parameter in both the algorithms?? 
 
-The edit distance based spell corrector shows an Accuracy of $73.1 \%$  when corrected text is compared to OCR text and original article text using our SCE algorithm. We believe that the results are less accurate due to the presence of a large number of non-word, new line, word split and join errors in the OCR data which can not be corrected by the edit distance spelling corrector used for this research. 
-On the other hand, the Lingpipe based context sensitive spelling corrector has a better AUC score demonstrating that in case of OCR text, this algorithm performs better.
+The edit distance based spell corrector shows an AUC score of 0.49 when corrected text is compared to OCR text and original article text using our SCE algorithm. We believe that the results are less accurate due to the presence of a large number of non-word, new line, word split and join errors in the OCR data which can not be corrected by the edit distance spelling corrector used for this research. 
+On the other hand, the Lingpipe based context sensitive spelling corrector has a better AUC score of 0.56 demonstrating that in case of OCR text, this algorithm performs better.
 
 We experimented with different window size for our N-gram based SCE algorithm for which following results were obtained:
 //////COMPUTE RESULTS OF SCE ALGORITHM BY CHANGING WINDOW SIZE
@@ -478,7 +460,9 @@ We  also compared our N-gram based SCE algorithm with the LCS (Longest Common Su
 it was found that there is no statistically significant difference in accuracy when using either of the two algorithms. We posit that LCS is a special case of the N-word gram algorithm when the window size N is set to the complete text in a line.
 %%DELETE LCS PROCEDURE AND JUST MENTION IT IS A SPECIAL CASE??
 
-//////AFTER THIS, MENTION HOW RESULTS CHANGE WHEN PARAMETERS OF SPELL CORRECTION ALGORITHMS ARE CHANGED
+//////COMPUTE RESULTS WHEN PARAMETERS OF SPELL CORRECTION ALGORITHMS ARE CHANGED
+We also experimented by changing the parameters of spell correction algorithms used in this study. For Edit distance algorithm, the change in edit distance gives following results:
+For Context sentitive spell correction algorithm, following parameters were modified:
 
 
 \section{Discussion}
@@ -487,13 +471,13 @@ The edit distance based spell corrector used in this work corrects non-real word
 We believe a better accuracy of spell correction can be obtained by correcting the new line errors in the articles. This can be done by checking for if the word at last index of a linetext or the word at first index of the next linetext is a word not present in the dictionary and combining the two and checking again in the dictionary for a valid word. The new word, if present in the dictionary can be replaced by the two words from which it is formed thereby removing the New Line error. Similar approach can be applied for word split and join errors but would require each word of an article not present in the dictionary to be analyzed along with some window of words before and after it to make a correction. 
 Since edit distance algorithm is governed by the dictionary choice, using a dictionary with historical terms, places and people names can also help perform spelling correction better and improve its accuracy.
 %%DELETE THE PART ABOUT HOW NEW LINE AND WORD SPLIT AND JOIN ERRORS CAN BE REMOVED??
-
+The LingPipe based context sensitive spell correction algorithm also employs a corpus dictionary for indexing the terms which suggests that the dictionary choice affects the results of spell correction in this case as well.
 
 
 \section{Conclusion and Future Work}
 \label{spell:fw}
-In this paper, we presented a novel approach for automatic performance evaluation of spell correction on noisy OCR text through N-word grams alignment of the OCR, corrected and manually cleaned text. Preliminary results of application of our algorithm on an Edit distance based spell corrector evaluate its accuracy to be 73.1\%. %We believe the N-word gram SCE algorithm can be used to evaluate accuracy of any kind of spell correction algorithm and provide a detailed performance by considering complete text coverage compared to simpler measures like percentage of corrected words or word error rate used previously. 
-In future, we plan to use other spelling correction algorithms like context dependent spelling correction to correct the OCR text and measure the accuracy using our SCE algorithm. 
+In this paper, we presented a novel approach for automatic performance evaluation of spell correction on noisy OCR text through N-word grams alignment of the OCR, corrected and manually cleaned text. Preliminary results of application of our algorithm on an Edit distance based spell corrector evaluate its AUC score to be 0.49 while it evaluates to 0.56 for Context Sensitive based spell corrector. We believe the N-word gram SCE algorithm can be used to evaluate any kind of spell correction algorithm and provide a detailed performance by considering complete text coverage compared to simpler measures like percentage of corrected words or word error rate used previously. It can be further used to examine multiple spell correction algorithms and analyze the best spell correction algorithm suited for OCR data mining tasks.
+In future, we plan to add more evaluation metrics to our evaluation algorithm.  
 %%DELETE FUTURE WORK IF NOT REQUIRED??
 
 
