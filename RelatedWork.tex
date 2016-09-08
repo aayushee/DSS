@@ -15,9 +15,25 @@ Semi-automatic spelling correction systems \cite{taghva2001ocrspell} require use
 The evaluation strategy works correctly but the definition of accuracy does not give a complete coverage of the spell correction as it does not provide any information on the errors missed by the spelling corrector due to lack of word by word comparison/alignment during the evaluation procedure.
 
 ---ADD RELATED WORK REGARDING LINGPIPE BASED CONTEXT SENSITIVE SPELL CORRECTION HERE. 
+LingPipe's model supports exactly this kind of context-sensitive correction.
+ it is able to split tokens as well as combine tokens
+ train up on the data which we are indexing with the search engine. 
+ sets the weights for operations like deletions, insertions etc.
+doing the language modeling at the character level ; no of characters too sample in d ata modeling
+training is done specific to tokenization
+Once the model and index are written to disk, we can read them in and correct queries
+
 
 ---ADD RELATED WORK REGARDING RECENT PAPERS READ ON SPELLING CORRECTION EVALUATION. (REYNAERT PAPERS, Compound words paper)
 
 --specifically mention that most of the evaluation mechanisms use OCR and true word pairs for measuring the algorithm performance which is not suitable for a complete evaluation of the spelling correction algorithm where the dataset has word split and join errors.
+
+A lot of research has been done on OCR post correction that use several spell correction models and evaluation measures. But most of them don't consider word split and join errors in the dataset due to which those measures aren't directly applicable on our dataset. 
+OCR and true word pairs are used to measure Word Error Rate for which it is difficult to generate the word pairs when a positional correspondence between the OCR and true word is not possible due to some extra or missing words in the OCR text.
+For example, \cite{reynaert2011character} consider only unigrams spell correction and don't consider gold standard words involving any spaces 
+
+\cite{kolak2002ocr} suggest an algorithm for finding OCR and true word pairs but assume that many words are recognized correctly for each line in the OCRed document, and use these words as anchor points for pairing. However, OCR of a historical newspapers generates lots of errors for which this assumption doesn't hold true. (Give an estimation of the number of errors on avg on each line in our ocr documents )
+
+
 
 

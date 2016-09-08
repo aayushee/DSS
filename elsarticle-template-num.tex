@@ -234,7 +234,7 @@ The Edit Distance algorithm based on Levenshtein distance\cite{levenshtein1966bi
 
 \subsection{Context Sensitive Spelling Corrector}
 We use LingPipe's spelling correction algorithm for spelling correction based on context. It is based on a noisy-channel model, which models user mistakes (typos and brainos) and expected user input (based on the data). Mistakes are modeled by weighted edit distances and expected input by a character language model.
-Spelling corrections are motivated by the indexed dictionary which make the algorithm domain sensitive.  The dictionary words are added to the search index and a language model. The language model stores seen phrases and maintains statistics about them. When a word is submitted for correction, the spell corrector looks for possible character edits, namely substitutions, insertions, replacements, transpositions, and deletions, that make the word to be corrected a better fit for the lanaguage model. The spell corrector is also able to split and combine tokens during spelling correction due to which Word Split and Join errors can also be corrected by this algorithm.
+Spelling corrections are motivated by the indexed dictionary which make the algorithm domain sensitive.  The dictionary words are added to the search index and a language model. The language model stores seen phrases and maintains statistics about them. When a word is submitted for correction, the spell corrector looks for possible character edits, namely substitutions, insertions, replacements, transpositions, and deletions, that make the word to be corrected a better fit for the language model. The spell corrector is also able to split and combine tokens during spelling correction due to which Word Split and Join errors can also be corrected by this algorithm.
 
 
 \subsection{Spelling Correction Algorithm Evaluation }
@@ -432,36 +432,49 @@ RQ1: Which spelling correction algorithm is better? %: auc score
 
 RQ2: How does the variation of the parameters of SCE affects the result? %mention LCS here.
 
-RQ3: How do parameters of the spelling correction algorithm affect the evaluation results?
+RQ3: How do parameters of the spelling correction algorithms affect the evaluation results?
 
 
 \noindent \textbf{Materials: }The spelling correction algorithms are used to correct all the 300 OCR raw text articles in the dataset. The dictionary used for look-up is a concatenation of several public domain books from Project Gutenberg and lists of most frequent words from Wiktionary and the British National Corpus\footnote{http://norvig.com/big.txt}. This is augmented with a large people names list which is obtained  by running Stanford NER-CRF parser on subsets of the ClueWeb12 dataset made available in the TREC 2013 Crowdsourcing Track\footnote{http://boston.lti.cs.cmu.edu/clueweb12/TRECcrowdsourcing2013/}. This enhanced dictionary has been used to give special consideration to correction of person names in the dataset.
-All our experiments are run on a 4GB RAM machine on Windows platform and the complete implementation of Edit distance and SCE algorithms has been carried out in Java. The context sensitive based spell correction algorithm from LingPipe 4.1.0 version also implemented in Java has been used in our experiments. 
+All our experiments are run on a 4GB RAM machine on Windows platform and the complete implementation of Edit distance and SCE algorithms has been carried out in Java. The context sensitive based spell correction algorithm from LingPipe 4.1.0 \footnote{http://alias-i.com/lingpipe/} version also implemented in Java has been used in our experiments. 
 
 %%%%%%%Provide links to source code later
 
 //////Mention answer to research questions here
 
-\noindent \textbf{Methods: }In order to answer RQ1 for comparing the performance of spell correction algorithms, we use AUC score as a metric as described in previous section. For answering RQ2, we vary the value of the N=2 in the N-gram SCE algorithm and compare it with the LCS (Lowest Common Substring) algorithm as well to observe the changes in results of evaluation.
-For addressing RQ3, we modify the parameters of both spell correction algorithms,i.e., value of edit distance=2 in the edit distance algorithm and other parameters in context sensitive algorithm and study the modified spell correction evaluation results.
+\noindent \textbf{Methods: }In order to answer RQ1 for comparing the performance of spell correction algorithms, we use AUC score as a metric as described in previous section. For answering RQ2, we vary the value of the word window N=2 in the N-gram SCE algorithm and compare it with the LCS (Lowest Common Substring) algorithm as well to observe the changes in results of evaluation.
+For addressing RQ3, we modify the parameters of both spell correction algorithms,i.e., value of edit distance in the edit distance algorithm and other parameters in context sensitive algorithm and study the modified spell correction evaluation results.
  
 
 \noindent \textbf{Results: }
 
 ////////DOUBT: Should I mention the time taken to run spell correction algo as a parameter in both the algorithms?? 
 
-The edit distance based spell corrector shows an AUC score of 0.49 when corrected text is compared to OCR text and original article text using our SCE algorithm. We believe that the results are less accurate due to the presence of a large number of non-word, new line, word split and join errors in the OCR data which can not be corrected by the edit distance spelling corrector used for this research. 
-On the other hand, the Lingpipe based context sensitive spelling corrector has a better AUC score of 0.56 demonstrating that in case of OCR text, this algorithm performs better.
+For N-gram SCE algorithm having N=2, the edit distance based spell corrector shows an AUC score of 0.490 when corrected text is compared to OCR text and original article text using our SCE algorithm. We believe that the results are less accurate due to the presence of a large number of non-word, new line, word split and join errors in the OCR data which can not be corrected by the edit distance spelling corrector used for this research. 
+On the other hand, the Lingpipe based context sensitive spelling corrector has a better AUC score of 0.554 demonstrating that in case of OCR text, this algorithm performs better.
 
-We experimented with different window size for our N-gram based SCE algorithm for which following results were obtained:
-//////COMPUTE RESULTS OF SCE ALGORITHM BY CHANGING WINDOW SIZE
+We experimented with N=3 for the N-gram based SCE algorithm for which following results were obtained:
 
-We  also compared our N-gram based SCE algorithm with the LCS (Longest Common Subsequence) algorithm\footnote{https://en.wikipedia.org/wiki/Longest\_common\_subsequence\_problem}. The LCS of corrected and original text gives a list of matching corrected words found in the original text. Following the similar evaluation procedure of calculating accuracy as in the N-word gram approach, %if a corrected word finds a match in the LCS and its spelling is found to be corrected, then it is marked as a TP otherwise a TN and if no match is found in LCS and spelling has been corrected, then it is marked a FP or else FN. 
-it was found that there is no statistically significant difference in accuracy when using either of the two algorithms. We posit that LCS is a special case of the N-word gram algorithm when the window size N is set to the complete text in a line.
-%%DELETE LCS PROCEDURE AND JUST MENTION IT IS A SPECIAL CASE??
 
-//////COMPUTE RESULTS WHEN PARAMETERS OF SPELL CORRECTION ALGORITHMS ARE CHANGED
-We also experimented by changing the parameters of spell correction algorithms used in this study. For Edit distance algorithm, the change in edit distance gives following results:
+
+\begin{table}[]
+\centering
+\caption{AUC Scores when N=3 for SCE algorithm}
+\label{my-label}
+\begin{tabular}{lllll}
+\cline{1-3}
+\multicolumn{1}{|l|}{ED=2} & \multicolumn{1}{l|}{ED=3} & \multicolumn{1}{l|}{LP} &  &  \\ \cline{1-3}
+\multicolumn{1}{|l|}{0.491} & \multicolumn{1}{l|}{0.493} & \multicolumn{1}{l|}{0.561} &  &  \\ \cline{1-3}
+ &  &  &  &  \\
+ &  &  &  & 
+\end{tabular}
+\end{table}
+
+
+
+We  also compared our N-gram based SCE algorithm with the LCS (Longest Common Subsequence) algorithm\footnote{https://en.wikipedia.org/wiki/Longest\_common\_subsequence\_problem}. The LCS of corrected and original text gives a list of matching corrected words found in the original text. Following the similar evaluation procedure of calculating accuracy as in the N-word gram approach, if a corrected word finds a match in the LCS and its spelling is found to be corrected, then it is marked as a TP otherwise a TN and if no match is found in LCS and spelling has been corrected, then it is marked a FP or else FN. It was found that there is no statistically significant difference in accuracy when using either of the two algorithms. We posit that LCS is a special case of the N-word gram algorithm when the window size N is set to the total number of words in a linetext.
+
+Our experiments on changing the parameters of spell correction algorithms used in this study reveal no significant changes in accuracy. For Edit distance algorithm, when edit distance is set to 3, the AUC score obtained in 0.492 which is not very high compared to the score obtained for an edit distance of 2.
 For Context sentitive spell correction algorithm, following parameters were modified:
 
 
@@ -477,7 +490,7 @@ The LingPipe based context sensitive spell correction algorithm also employs a c
 \section{Conclusion and Future Work}
 \label{spell:fw}
 In this paper, we presented a novel approach for automatic performance evaluation of spell correction on noisy OCR text through N-word grams alignment of the OCR, corrected and manually cleaned text. Preliminary results of application of our algorithm on an Edit distance based spell corrector evaluate its AUC score to be 0.49 while it evaluates to 0.56 for Context Sensitive based spell corrector. We believe the N-word gram SCE algorithm can be used to evaluate any kind of spell correction algorithm and provide a detailed performance by considering complete text coverage compared to simpler measures like percentage of corrected words or word error rate used previously. It can be further used to examine multiple spell correction algorithms and analyze the best spell correction algorithm suited for OCR data mining tasks.
-In future, we plan to add more evaluation metrics to our evaluation algorithm.  
+In future, we plan to add more evaluation metrics to our evaluation algorithm. 
 %%DELETE FUTURE WORK IF NOT REQUIRED??
 
 

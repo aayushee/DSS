@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.26)  17 JUL 2016 08:15
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.26)  8 SEP 2016 20:30
 entering extended mode
 **C:/Users/AAYUSHEE/git/DSS/elsarticle-template-num.tex
 (C:/Users/AAYUSHEE/git/DSS/elsarticle-template-num.tex
@@ -172,14 +172,14 @@ Overfull \hbox (4.48041pt too wide) in paragraph at lines 9--13
 -ner and Fischer[[]],
  []
 
-[3]) <images/originalimage.png, id=16, 313.17pt x 189.70876pt>
+[3]) [4] <images/originalimage.png, id=22, 313.17pt x 189.70876pt>
 File: images/originalimage.png Graphic file (type png)
 
 <use images/originalimage.png>
 Package pdftex.def Info: images/originalimage.png used on input line 174.
 (pdftex.def)             Requested size: 234.8769pt x 142.2812pt.
 
-<images/ocr.png, id=18, 306.39468pt x 175.40532pt>
+<images/ocr.png, id=24, 306.39468pt x 175.40532pt>
 File: images/ocr.png Graphic file (type png)
  <use images/ocr.png>
 Package pdftex.def Info: images/ocr.png used on input line 175.
@@ -189,24 +189,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 174--176
 [][]
  []
 
-[4] [5 <C:/Users/AAYUSHEE/git/DSS/images/originalimage.png> <C:/Users/AAYUSHEE/
+[5] [6 <C:/Users/AAYUSHEE/git/DSS/images/originalimage.png> <C:/Users/AAYUSHEE/
 git/DSS/images/ocr.png>]
 Overfull \hbox (6.36617pt too wide) in paragraph at lines 199--201
 []\OT1/cmr/m/n/10.95 Two months of ar-ti-cles of ``The Sun" news-pa-per from No
 vember-December
  []
 
-[6] [7] <images/ngram.png, id=39, 416.30531pt x 221.32687pt>
+[7] [8] <images/ngram.png, id=42, 416.30531pt x 221.32687pt>
 File: images/ngram.png Graphic file (type png)
 
 <use images/ngram.png>
 Package pdftex.def Info: images/ngram.png used on input line 260.
 (pdftex.def)             Requested size: 333.0447pt x 177.06172pt.
- [8]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
+ [9]
 LaTeX Font Info:    Try loading font information for OML+cmr on input line 302.
+
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omlcmr.fd"
 File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
@@ -221,27 +219,27 @@ Overfull \hbox (133.10542pt too wide) in paragraph at lines 302--303
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[9 <C:/Users/AAYUSHEE/git/DSS/images/ngram.png>] [10]
-<images/img3.png, id=54, 528.47438pt x 386.94562pt>
+[10 <C:/Users/AAYUSHEE/git/DSS/images/ngram.png>] [11]
+<images/img3.png, id=57, 528.47438pt x 386.94562pt>
 File: images/img3.png Graphic file (type png)
  <use images/img3.png>
 Package pdftex.def Info: images/img3.png used on input line 410.
 (pdftex.def)             Requested size: 211.386pt x 154.7755pt.
 
-<images/originalimg3.png, id=55, 310.15875pt x 202.50656pt>
+<images/originalimg3.png, id=58, 310.15875pt x 202.50656pt>
 File: images/originalimg3.png Graphic file (type png)
 
 <use images/originalimg3.png>
 Package pdftex.def Info: images/originalimg3.png used on input line 411.
 (pdftex.def)             Requested size: 232.61848pt x 151.87953pt.
 
-<images/ocr3.png, id=56, 312.41719pt x 202.50656pt>
+<images/ocr3.png, id=59, 312.41719pt x 202.50656pt>
 File: images/ocr3.png Graphic file (type png)
  <use images/ocr3.png>
 Package pdftex.def Info: images/ocr3.png used on input line 419.
 (pdftex.def)             Requested size: 234.3123pt x 151.87953pt.
 
-<images/corrected3.png, id=57, 312.41719pt x 204.01219pt>
+<images/corrected3.png, id=60, 312.41719pt x 204.01219pt>
 File: images/corrected3.png Graphic file (type png)
 
 <use images/corrected3.png>
@@ -252,41 +250,41 @@ Underfull \hbox (badness 10000) in paragraph at lines 419--421
 [][]
  []
 
-[11] [12 <C:/Users/AAYUSHEE/git/DSS/images/img3.png> <C:/Users/AAYUSHEE/git/DSS
-/images/originalimg3.png>] [13 <C:/Users/AAYUSHEE/git/DSS/images/ocr3.png> <C:/
-Users/AAYUSHEE/git/DSS/images/corrected3.png>]
-Overfull \hbox (3.28691pt too wide) in paragraph at lines 463--466
-[]\OT1/cmr/m/n/10.95 //////COMPUTE RE-SULTS WHEN PA-RAM-E-TERS OF SPELL COR-
- []
+[12 <C:/Users/AAYUSHEE/git/DSS/images/img3.png> <C:/Users/AAYUSHEE/git/DSS/imag
+es/originalimg3.png>] [13 <C:/Users/AAYUSHEE/git/DSS/images/ocr3.png> <C:/Users
+/AAYUSHEE/git/DSS/images/corrected3.png>]
 
-[14] (C:\Users\AAYUSHEE\git\DSS\elsarticle-template-num.bbl [15] [16]) [17]
-(C:\Users\AAYUSHEE\git\DSS\elsarticle-template-num.aux) ) 
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 460.
+
+[14] [15] (C:\Users\AAYUSHEE\git\DSS\elsarticle-template-num.bbl [16] [17])
+[18] (C:\Users\AAYUSHEE\git\DSS\elsarticle-template-num.aux) ) 
 Here is how much of TeX's memory you used:
- 2192 strings out of 494045
- 28312 string characters out of 3148378
- 84731 words of memory out of 3000000
- 5457 multiletter control sequences out of 15000+200000
+ 2199 strings out of 494045
+ 28469 string characters out of 3148378
+ 83773 words of memory out of 3000000
+ 5464 multiletter control sequences out of 15000+200000
  12632 words of font info for 48 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
  34i,14n,30p,1883b,299s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
-/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmmi9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10
-.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/
-Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Fi
-les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX
- 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmti10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
-sfonts/cm/cmti9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmtt9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/latxfont/li
-ne10.pfb>
-Output written on elsarticle-template-num.pdf (17 pages, 486669 bytes).
+<C:/Program Files
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
+fonts/cm/cmmi9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb
+><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Progr
+am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/cm/cmti10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmti9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmtt9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/latxfo
+nt/line10.pfb>
+Output written on elsarticle-template-num.pdf (18 pages, 489726 bytes).
 PDF statistics:
- 131 PDF objects out of 1000 (max. 8388607)
+ 134 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  36 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -102,6 +102,16 @@ K.~Taghva, E.~Stofsky, Ocrspell: an interactive spelling correction system for
 S.~V. Rice, Measuring the accuracy of page-reading systems, Ph.D. thesis,
   University of Nevada (1996).
 
+\bibitem{reynaert2011character}
+M.~W. Reynaert, Character confusion versus focus word-based correction of
+  spelling and ocr variants in corpora, International Journal on Document
+  Analysis and Recognition (IJDAR) 14~(2) (2011) 173--187.
+
+\bibitem{kolak2002ocr}
+O.~Kolak, P.~Resnik, Ocr error correction using a noisy channel model, in:
+  Proceedings of the second international conference on Human Language
+  Technology Research, Morgan Kaufmann Publishers Inc., 2002, pp. 257--262.
+
 \bibitem{levenshtein1966binary}
 V.~I. Levenshtein, Binary codes capable of correcting deletions, insertions and
   reversals, in: Soviet Physics Doklady, Vol.~10, 1966, p. 707.
